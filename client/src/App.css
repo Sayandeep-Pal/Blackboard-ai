@@ -91,7 +91,7 @@ body {
 
 @media (max-width: 500px){
   .toolbar{
-    top: 5px;
+    top: 5%;
     right: 1%;
     width: 20%;
 
