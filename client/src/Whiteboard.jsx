@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import axios from 'axios';
-import Tesseract from 'tesseract.js';
 
 const Whiteboard = () => {
 
@@ -13,39 +12,47 @@ const Whiteboard = () => {
   const [eraserSize, setEraserSize] = useState(20); // Eraser size
   const [penColor, setPenColor] = useState("white"); // Pen color
   const [result, setResult] = useState("");
-  const [problem, setproblem] = useState("");
+  const [problem, setProblem] = useState("");
 
   // Resize canvas to full window
   useEffect(() => {
     const canvas = canvasRef.current;
-    canvas.width = window.innerWidth * 0.95; // 90% of window width
-    canvas.height = window.innerHeight * 0.6; // 90% of window height
+    canvas.width = window.innerWidth * 0.95; // 95% of window width
+    canvas.height = window.innerHeight * 0.6; // 60% of window height
     const ctx = canvas.getContext("2d");
     ctx.fillStyle = "#1a1a1a"; // Canvas background color
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }, []);
 
-  // Function to get cursor position relative to the canvas
+  // Get cursor or touch position relative to the canvas
   const getCursorPosition = (e) => {
     const canvas = canvasRef.current;
-    const rect = canvas.getBoundingClientRect(); // Get canvas position
+    const rect = canvas.getBoundingClientRect();
+
+    // Check if it's a touch event
+    const isTouch = e.touches && e.touches.length > 0;
+    const clientX = isTouch ? e.touches[0].clientX : e.clientX;
+    const clientY = isTouch ? e.touches[0].clientY : e.clientY;
+
     return {
-      x: e.clientX - rect.left, // Adjust for canvas's left offset
-      y: e.clientY - rect.top,  // Adjust for canvas's top offset
+      x: clientX - rect.left,
+      y: clientY - rect.top,
     };
   };
 
   const startDrawing = (e) => {
+    e.preventDefault(); // Prevent scrolling on touch devices
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     const { x, y } = getCursorPosition(e);
     ctx.beginPath();
-    ctx.moveTo(x, y); // Start drawing at the adjusted coordinates
+    ctx.moveTo(x, y);
     setIsDrawing(true);
   };
 
   const draw = (e) => {
     if (!isDrawing) return;
+    e.preventDefault(); // Prevent scrolling on touch devices
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     const { x, y } = getCursorPosition(e);
@@ -56,11 +63,14 @@ const Whiteboard = () => {
     ctx.stroke();
   };
 
-  const stopDrawing = () => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    ctx.closePath();
-    setIsDrawing(false);
+  const stopDrawing = (e) => {
+    if (isDrawing) {
+      e.preventDefault();
+      const canvas = canvasRef.current;
+      const ctx = canvas.getContext("2d");
+      ctx.closePath();
+      setIsDrawing(false);
+    }
   };
 
   const clearCanvas = () => {
@@ -69,7 +79,6 @@ const Whiteboard = () => {
     ctx.fillStyle = "#1a1a1a"; // Canvas background color
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   };
-
 
   const sendCanvasToBackend = async () => {
     const canvas = canvasRef.current;
@@ -86,9 +95,9 @@ const Whiteboard = () => {
       const data = response.data;
   
       if (data.success) {
-        setproblem(`Expression : ${data.problem}`)
+        setProblem(`Expression: ${data.problem}`);
         setResult(`Result: ${data.result}`);
-        console.log(`Extracted Problem: ${data.problem}\nResult: ${data.result}`)
+        console.log(`Extracted Problem: ${data.problem}\nResult: ${data.result}`);
       } else {
         setResult(`Error: ${data.message}`);
       }
@@ -96,46 +105,7 @@ const Whiteboard = () => {
       console.error("Error connecting to backend:", error);
       setResult("Failed to connect to the backend. Please try again.");
     }
-};
-  
-
-//   const sendProblemToBackend = async (problemText) => {
-//     try {
-//       const response = await axios.post("http://localhost:3000/calculate", {
-//         problem: problemText,  // Send the extracted problem to the backend
-//       });
-
-//       const data = response.data;
-
-//       if (data.success) {
-//         setResult(`Problem: ${data.problem}\nResult: ${data.result}`);
-//         alert(`Problem: ${data.problem}\nResult: ${data.result}`)
-//       } else {
-//         setResult(`Error: ${data.message}`);
-//         alert(`Error: ${data.message}`)
-//       }
-//     } catch (error) {
-//       console.error("Error connecting to backend:", error);
-//       setResult("Failed to connect to the backend. Please try again.");
-//     }
-//   };
-
-//   // Extract text from the canvas using Tesseract.js
-//   const extractTextFromCanvas = () => {
-//     const canvas = canvasRef.current;
-//     const imageBase64 = canvas.toDataURL("image/png"); // Convert canvas to base64 image
-
-//     Tesseract.recognize(
-//       imageBase64,
-//       'eng', // Language of text in the image
-//       {
-//         logger: (m) => console.log(m), // Log progress
-//       }
-//     ).then(({ data: { text } }) => {
-//       console.log('Extracted Text:', text);
-//       sendProblemToBackend(text); // Send extracted text to the backend
-//     });
-//   };
+  };
 
   return (
     <div className="whiteboard">
@@ -211,17 +181,20 @@ const Whiteboard = () => {
         onMouseMove={draw}
         onMouseUp={stopDrawing}
         onMouseLeave={stopDrawing}
+        onTouchStart={startDrawing}   // Touch equivalent of onMouseDown
+        onTouchMove={draw}           // Touch equivalent of onMouseMove
+        onTouchEnd={stopDrawing}     // Touch equivalent of onMouseUp
       ></canvas>
 
+      {/* Result Section */}
       <div className="result">
         {result && (
-            <>
-                <h1>Answer :</h1>
-                <h3>{problem}</h3>
-                <h3>{result}</h3>
-            </>
-            
-            )}
+          <>
+            <h1>Answer:</h1>
+            <h3>{problem}</h3>
+            <h3>{result}</h3>
+          </>
+        )}
       </div>
     </div>
   );
