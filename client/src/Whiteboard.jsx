@@ -3,6 +3,9 @@ import axios from 'axios';
 import Tesseract from 'tesseract.js';
 
 const Whiteboard = () => {
+
+  const URL = "https://blackboard-ai-backend.vercel.app";
+
   const canvasRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [tool, setTool] = useState("pen"); // Current tool: "pen" or "eraser"
@@ -75,7 +78,7 @@ const Whiteboard = () => {
     const imageBase64 = canvas.toDataURL("image/png");
     
     try {
-      const response = await axios.post("https://blackboard-ai-backend.vercel.app/calculate", {
+      const response = await axios.post(`${URL}/calculate`, {
         image: imageBase64, // Send the image as base64
         variables: { x: 5, y: 10 } // Include any additional variables if needed
       });
