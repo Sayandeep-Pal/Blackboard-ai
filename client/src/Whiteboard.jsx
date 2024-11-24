@@ -126,7 +126,7 @@ const Whiteboard = () => {
         <button onClick={clearCanvas} className="tool-button">
           Clear
         </button>
-        <button onClick={sendCanvasToBackend} className="tool-button btn-success">
+        <button onClick={sendCanvasToBackend} className="tool-button calculate-btn">
           Calculate
         </button>
 
