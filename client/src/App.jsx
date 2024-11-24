@@ -6,20 +6,20 @@ import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 const App = () => {
   return (
     <>
-      <GoogleOAuthProvider clientId="732493616824-t61jg5fv6kte173v3bcloh04jci234op.apps.googleusercontent.com">
+      {/* <GoogleOAuthProvider clientId="732493616824-t61jg5fv6kte173v3bcloh04jci234op.apps.googleusercontent.com">
         <GoogleLogin
           onSuccess={credentialResponse => {
-            console.log(credentialResponse);
+            console.log(credentialResponse); */}
             <div className="app">
               <h1>Blackboard</h1>
               <Whiteboard />
             </div>
-          }}
-          onError={() => {
-            console.log('Login Failed');
-          }}
-        />
-      </GoogleOAuthProvider>
+      {/* //     }}
+      //     onError={() => {
+      //       console.log('Login Failed');
+      //     }}
+      //   />
+      // </GoogleOAuthProvider> */}
 
 
     </>
