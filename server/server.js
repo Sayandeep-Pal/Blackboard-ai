@@ -114,7 +114,9 @@ async function analyzeImage(imageBase64, dictOfVars) {
 }
 
 
-
+app.get("/",(req,res)=>{
+  res.json("THIS IS BACKEND.");
+})
 
 
 // API endpoint for calculating based on image
