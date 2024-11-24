@@ -12,6 +12,7 @@ const GENAI_API_KEY = "AIzaSyALwTpR2BCYjUJ-qLRydIyPq42-BusGmhs";
 
 // Middleware
 app.use(cors());
+app.use(express.json())
 app.use(bodyParser.json({ limit: "50mb" })); // Handle large base64 payloads
 
 // Initialize Google Generative AI
