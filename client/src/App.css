@@ -18,6 +18,8 @@ body {
   right: 5%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   gap: 10px;
   background-color: rgba(0, 0, 0, 0.8);
   padding: 10px;
@@ -92,8 +94,8 @@ body {
 @media (max-width: 500px){
   .toolbar{
     top: 10%;
-    right: 1%;
-    width: 20%;
+    right: 2%;
+    width: 22%;
 
   }
 
@@ -102,6 +104,6 @@ body {
   }
 
   .slider-container input[type="range"] {
-    width: 50px;
+    width: 70px;
   }
 }

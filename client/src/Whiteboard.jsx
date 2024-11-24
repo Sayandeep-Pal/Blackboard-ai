@@ -7,10 +7,10 @@ const Whiteboard = () => {
 
   const canvasRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
-  const [tool, setTool] = useState("pen"); // Current tool: "pen" or "eraser"
-  const [penSize, setPenSize] = useState(2); // Pen size
-  const [eraserSize, setEraserSize] = useState(20); // Eraser size
-  const [penColor, setPenColor] = useState("white"); // Pen color
+  const [tool, setTool] = useState("pen");
+  const [penSize, setPenSize] = useState(2);
+  const [eraserSize, setEraserSize] = useState(20);
+  const [penColor, setPenColor] = useState("white");
   const [result, setResult] = useState("");
   const [problem, setProblem] = useState("");
 
@@ -29,7 +29,6 @@ const Whiteboard = () => {
     const canvas = canvasRef.current;
     const rect = canvas.getBoundingClientRect();
 
-    // Check if it's a touch event
     const isTouch = e.touches && e.touches.length > 0;
     const clientX = isTouch ? e.touches[0].clientX : e.clientX;
     const clientY = isTouch ? e.touches[0].clientY : e.clientY;
@@ -41,7 +40,7 @@ const Whiteboard = () => {
   };
 
   const startDrawing = (e) => {
-    e.preventDefault(); // Prevent scrolling on touch devices
+    e.preventDefault();
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     const { x, y } = getCursorPosition(e);
@@ -52,14 +51,14 @@ const Whiteboard = () => {
 
   const draw = (e) => {
     if (!isDrawing) return;
-    e.preventDefault(); // Prevent scrolling on touch devices
+    e.preventDefault();
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     const { x, y } = getCursorPosition(e);
 
     ctx.lineTo(x, y);
-    ctx.strokeStyle = tool === "pen" ? penColor : "#1a1a1a"; // Pen or eraser color
-    ctx.lineWidth = tool === "pen" ? penSize : eraserSize; // Pen or eraser size
+    ctx.strokeStyle = tool === "pen" ? penColor : "#1a1a1a";
+    ctx.lineWidth = tool === "pen" ? penSize : eraserSize;
     ctx.stroke();
   };
 
@@ -82,14 +81,11 @@ const Whiteboard = () => {
 
   const sendCanvasToBackend = async () => {
     const canvas = canvasRef.current;
-    
-    // Convert canvas to a base64 image
     const imageBase64 = canvas.toDataURL("image/png");
-    
     try {
       const response = await axios.post(`${URL}/calculate`, {
-        image: imageBase64, // Send the image as base64
-        variables: { x: 5, y: 10 } // Include any additional variables if needed
+        image: imageBase64,
+        variables: { x: 5, y: 10 },
       });
   
       const data = response.data;
@@ -107,10 +103,21 @@ const Whiteboard = () => {
     }
   };
 
+  // Function to download the canvas as an image
+  const downloadCanvasImage = () => {
+    const canvas = canvasRef.current;
+    const imageBase64 = canvas.toDataURL("image/png");
+    
+    // Create a link element to download the image
+    const downloadLink = document.createElement("a");
+    downloadLink.href = imageBase64;
+    downloadLink.download = "whiteboard_screenshot.png";
+    downloadLink.click();
+  };
+
   return (
     <div className="whiteboard">
       <div className="toolbar">
-        {/* Tool Buttons */}
         <button
           onClick={() => setTool("pen")}
           className={`tool-button ${tool === "pen" ? "active" : ""}`}
@@ -126,11 +133,13 @@ const Whiteboard = () => {
         <button onClick={clearCanvas} className="tool-button">
           Clear
         </button>
-        <button onClick={sendCanvasToBackend} className="tool-button calculate-btn">
+        <button onClick={sendCanvasToBackend} className="tool-button btn-success">
           Calculate
         </button>
+        <button onClick={downloadCanvasImage} className="tool-button btn-download fa fa-download">
+          {/* Download Screenshot */}
+        </button>
 
-        {/* Pen Size Slider */}
         {tool === "pen" && (
           <div className="slider-container">
             <label htmlFor="penSize">Pen Size: {penSize}px</label>
@@ -145,7 +154,6 @@ const Whiteboard = () => {
           </div>
         )}
 
-        {/* Eraser Size Slider */}
         {tool === "eraser" && (
           <div className="slider-container">
             <label htmlFor="eraserSize">Eraser Size: {eraserSize}px</label>
@@ -160,7 +168,6 @@ const Whiteboard = () => {
           </div>
         )}
 
-        {/* Color Picker */}
         {tool === "pen" && (
           <div className="color-picker">
             <label htmlFor="penColor">Pen Color:</label>
@@ -174,19 +181,17 @@ const Whiteboard = () => {
         )}
       </div>
 
-      {/* Canvas */}
       <canvas
         ref={canvasRef}
         onMouseDown={startDrawing}
         onMouseMove={draw}
         onMouseUp={stopDrawing}
         onMouseLeave={stopDrawing}
-        onTouchStart={startDrawing}   // Touch equivalent of onMouseDown
-        onTouchMove={draw}           // Touch equivalent of onMouseMove
-        onTouchEnd={stopDrawing}     // Touch equivalent of onMouseUp
+        onTouchStart={startDrawing}
+        onTouchMove={draw}
+        onTouchEnd={stopDrawing}
       ></canvas>
 
-      {/* Result Section */}
       <div className="result">
         {result && (
           <>
