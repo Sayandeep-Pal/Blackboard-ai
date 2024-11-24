@@ -4,7 +4,7 @@ import Tesseract from 'tesseract.js';
 
 const Whiteboard = () => {
 
-  const URL = "https://blackboard-ai-backend.vercel.app";
+  const URL = "https://blackboard-ai-be.vercel.app";
 
   const canvasRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
