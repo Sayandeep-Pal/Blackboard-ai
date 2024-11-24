@@ -75,7 +75,7 @@ const Whiteboard = () => {
     const imageBase64 = canvas.toDataURL("image/png");
     
     try {
-      const response = await axios.post("http://localhost:3000/calculate", {
+      const response = await axios.post("https://blackboard-ai-backend.vercel.app/calculate", {
         image: imageBase64, // Send the image as base64
         variables: { x: 5, y: 10 } // Include any additional variables if needed
       });
