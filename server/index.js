@@ -5,6 +5,34 @@ const fs = require("fs");
 const path = require("path");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
+
+// For authentication purpose
+const express = require("express");
+const { OAuth2Client } = require("google-auth-library");
+const router = express.Router();
+
+const client = new OAuth2Client(
+  "732493616824-t61jg5fv6kte173v3bcloh04jci234op.apps.googleusercontent.com"
+);
+
+router.post("/auth/google", async (req, res) => {
+  const { token } = req.body;
+  try {
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience:
+        "732493616824-t61jg5fv6kte173v3bcloh04jci234op.apps.googleusercontent.com",
+    });
+    const payload = ticket.getPayload();
+    res.json({ success: true, user: payload });
+  } catch (error) {
+    res.status(401).json({ success: false, message: "Invalid token" });
+  }
+});
+
+module.exports = router;
+
+
 const app = express();
 const port =  3000;
 
