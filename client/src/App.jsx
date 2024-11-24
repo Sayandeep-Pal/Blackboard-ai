@@ -37,7 +37,7 @@ const App = () => {
       <div className="auth-container">
         {!isAuthenticated ? (
           <GoogleLogin
-            clientId="YOUR_GOOGLE_CLIENT_ID" // Replace with your client ID
+            clientId="732493616824-t61jg5fv6kte173v3bcloh04jci234op.apps.googleusercontent.com" // Replace with your client ID
             buttonText="Continue with Google"
             onSuccess={handleLoginSuccess}
             onFailure={handleLoginFailure}
@@ -46,7 +46,7 @@ const App = () => {
         ) : (
           <div>
             <GoogleLogout
-              clientId="YOUR_GOOGLE_CLIENT_ID"
+              clientId="732493616824-t61jg5fv6kte173v3bcloh04jci234op.apps.googleusercontent.com"
               buttonText="Logout"
               onLogoutSuccess={handleLogout}
             />
