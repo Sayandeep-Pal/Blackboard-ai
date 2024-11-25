@@ -3,7 +3,6 @@ import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
 import Whiteboard from "./Whiteboard";
 import './App.css'
 import "./Login.css";
-import { BiBorderRadius } from "react-icons/bi";
 
 const LoginPage = () => {
 
