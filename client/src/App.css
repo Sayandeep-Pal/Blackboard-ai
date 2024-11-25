@@ -11,6 +11,16 @@ body {
   overflow: hidden;
 }
 
+.logo{
+  position: absolute;
+  top: 10%;
+  left: 20px;
+  background-color: #fff;
+  color: #2c2c2c;
+  padding: 5px;
+  border-radius: 10px;
+}
+
 /* Toolbar Styling */
 .toolbar {
   position: absolute;
