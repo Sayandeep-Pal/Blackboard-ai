@@ -103,10 +103,10 @@ body {
 @media (max-width: 500px) {
   .icon {
     position: absolute;
-    top: 0;
+    top: 10%;
   }
   .toolbar {
-    top: 55px;
+    top: 20%;
     right: 1px;
     padding: 5px;
     gap: 2px;

@@ -18,7 +18,7 @@ const Whiteboard = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     canvas.width = window.innerWidth * 0.95; // 95% of window width
-    canvas.height = window.innerHeight * 0.6; // 60% of window height
+    canvas.height = window.innerHeight * 0.65; // 60% of window height
     const ctx = canvas.getContext("2d");
     ctx.fillStyle = "#1a1a1a"; // Canvas background color
     ctx.fillRect(0, 0, canvas.width, canvas.height);
