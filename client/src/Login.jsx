@@ -6,7 +6,7 @@ import "./Login.css";
 
 const LoginPage = () => {
 
-    const [auth, setAuth] = useState(false);
+    const [auth, setAuth] = useState(true);
 
     return (
         <>
@@ -47,7 +47,7 @@ const LoginPage = () => {
 
             {auth === true &&
                 (<div className="app">
-                    <h1>Blackboard</h1>
+                    <h1 className="icon">Blackboard</h1>
                     <Whiteboard />
                 </div>)
             }

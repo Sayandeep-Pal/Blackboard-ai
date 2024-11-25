@@ -11,7 +11,7 @@ body {
   overflow: hidden;
 }
 
-.logo{
+.logo {
   position: absolute;
   top: 10%;
   left: 20px;
@@ -56,9 +56,9 @@ body {
   background-color: #ff4757; /* Highlight active tool */
 }
 
-.calculate-btn{
+.calculate-btn {
   background-color: rgb(0, 255, 0);
-  color:#2c2c2c;
+  color: #2c2c2c;
 }
 
 /* Slider and Label */
@@ -96,24 +96,33 @@ body {
   cursor: pointer;
 }
 
-.result{
+.result {
   width: 90%;
 }
 
-
-@media (max-width: 500px){
-  .toolbar{
-    top: 10%;
-    right: 2%;
-    width: 22%;
-
+@media (max-width: 500px) {
+  .icon {
+    position: absolute;
+    top: 0;
+  }
+  .toolbar {
+    top: 55px;
+    right: 1px;
+    padding: 5px;
+    gap: 2px;
   }
 
-  .tool-button{
-    padding: 5px 10px;
+  .tool-button {
+    padding: 2.5px 8px;
   }
 
   .slider-container input[type="range"] {
-    width: 70px;
+    width: 50px;
+  }
+
+  .color-picker input[type="color"] {
+    width: 15px;
+    height: 15px;
+    padding: 5px;
   }
 }
