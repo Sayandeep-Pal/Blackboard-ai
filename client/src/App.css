@@ -103,7 +103,7 @@ body {
 @media (max-width: 500px) {
   .icon {
     position: absolute;
-    top: -4px;
+    top: 0;
   }
   .toolbar {
     top: 8%;
