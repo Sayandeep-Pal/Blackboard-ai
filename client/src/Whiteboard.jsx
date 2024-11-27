@@ -196,7 +196,7 @@ const Whiteboard = () => {
 
       <div className="result">
         {result && (
-          <div style={{height:'150vh'}}>
+          <div style={{height:'100vh'}}>
             <h1>Answer:</h1>
             <h3>{problem}</h3>
             <h3>{result}</h3>
