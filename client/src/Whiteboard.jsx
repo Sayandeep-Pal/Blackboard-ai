@@ -77,6 +77,7 @@ const Whiteboard = () => {
     const ctx = canvas.getContext("2d");
     ctx.fillStyle = "#1a1a1a"; // Canvas background color
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    setResult('');
   };
 
   const sendCanvasToBackend = async () => {
