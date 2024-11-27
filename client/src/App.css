@@ -106,7 +106,7 @@ body {
     top: 0;
   }
   .toolbar {
-    top: 1%;
+    top: 10%;
     /* right: 1px; */
     padding: 5px;
     gap: 2px;
