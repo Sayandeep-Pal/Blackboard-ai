@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
-import {jwtDecode} from "../node_modules/jwt-decode/build/cjs/index";
+import jwtDecode from "jwt-decode";
 import axios from "axios";
 import Whiteboard from "./Whiteboard";
 import "./App.css";
