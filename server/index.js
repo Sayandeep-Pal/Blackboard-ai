@@ -5,7 +5,7 @@ const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-const UserModel = require("./model/Users.js");
+const UserModel = require("./model/User.js");
 
 
 

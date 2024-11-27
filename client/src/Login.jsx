@@ -8,15 +8,18 @@ import "./Login.css";
 
 const LoginPage = () => {
   const [auth, setAuth] = useState(false);
+//   const URL = 'http://localhost:3000';
+const URL = "https://blackboard-ai-be.vercel.app";
+
 
   const handleLoginSuccess = async (credentialResponse) => {
     try {
       const decoded = jwtDecode(credentialResponse?.credential);
       const name = `${decoded.given_name} ${decoded.family_name}`;
-      console.log("User decoded:", decoded);
+    //   console.log("User decoded:", decoded);
 
       // Save user info in the backend
-      await axios.post("https://blackboard-ai-be.vercel.app/createUser", {
+      await axios.post(`${URL}/createUser`, {
         username: name,
         email: decoded.email,
       });

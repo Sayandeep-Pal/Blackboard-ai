@@ -4,6 +4,7 @@ import axios from 'axios';
 const Whiteboard = () => {
 
   const URL = "https://blackboard-ai-be.vercel.app";
+  // const URL = 'http://localhost:3000';
 
   const canvasRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
