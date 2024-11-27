@@ -13,14 +13,14 @@ const LoginPage = () => {
     try {
       const decoded = jwtDecode(credentialResponse?.credential);
       const name = `${decoded.given_name} ${decoded.family_name}`;
-      
+      console.log("User decoded:", decoded);
+
       // Save user info in the backend
       await axios.post("https://blackboard-ai-be.vercel.app/createUser", {
         username: name,
         email: decoded.email,
       });
 
-      console.log("User decoded:", decoded);
       setAuth(true);
     } catch (error) {
       console.error("Error during login or user creation:", error);
