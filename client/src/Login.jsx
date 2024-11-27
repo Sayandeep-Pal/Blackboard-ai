@@ -3,10 +3,13 @@ import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
 import Whiteboard from "./Whiteboard";
 import './App.css'
 import "./Login.css";
+import { jwtDecode } from "jwt-decode";
+import axios from 'axios';
+
 
 const LoginPage = () => {
 
-    const [auth, setAuth] = useState(true);
+    const [auth, setAuth] = useState(false);
 
     return (
         <>
@@ -20,7 +23,13 @@ const LoginPage = () => {
                     <GoogleOAuthProvider clientId="732493616824-t61jg5fv6kte173v3bcloh04jci234op.apps.googleusercontent.com">
                         <GoogleLogin 
                             onSuccess={credentialResponse => {
-                                console.log(credentialResponse);
+                                const decoded = jwtDecode(credentialResponse?.credential);
+                                const name = decoded.given_name + decoded.family_name;
+                                axios.post("https://blackboard-ai-be.vercel.app/createUser",{
+                                    username : name,
+                                    email: decoded.email,
+                                })
+                                console.log(decoded);
                                 setAuth(true);
                             }}
                             onError={() => {

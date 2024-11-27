@@ -1,14 +1,21 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+const UserModel = require("./model/Users.js");
+
 
 
 
 const app = express();
 const port =  3000;
+
+mongoose.connect(
+  "mongodb+srv://sayandeep123:babusona@cluster0.0qugd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+);
 
 const GENAI_API_KEY = "AIzaSyALwTpR2BCYjUJ-qLRydIyPq42-BusGmhs";
 
@@ -16,6 +23,7 @@ const GENAI_API_KEY = "AIzaSyALwTpR2BCYjUJ-qLRydIyPq42-BusGmhs";
 app.use(cors());
 // app.use(express.json())
 app.use(bodyParser.json({ limit: "50mb" })); // Handle large base64 payloads
+
 
 // Initialize Google Generative AI
 const genAI = new GoogleGenerativeAI(GENAI_API_KEY);
@@ -121,6 +129,22 @@ app.get("*", (req, res) => {
   res
     .status(404)
     .send("This is a backend API server. Please use valid API endpoints.");
+});
+
+// Userdata storing in MongoDB
+app.post("/createUser", async (request, response) => {
+  const { username, email } = request.body;
+
+  try {
+    // Create the user with hashed password
+    UserModel.create({
+      username: username,
+      email: email,
+    }).then((user) => response.status(201).json(user));
+  } catch (err) {
+    console.error(err);
+    response.status(500).json({ message: "Server error", error: err });
+  }
 });
 
 
