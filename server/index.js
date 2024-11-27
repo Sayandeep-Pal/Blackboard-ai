@@ -132,20 +132,26 @@ app.get("*", (req, res) => {
 });
 
 // Userdata storing in MongoDB
-app.post("/createUser", async (request, response) => {
-  const { username, email } = request.body;
+app.post("/createUser", async (req, res) => {
+  const { username, email } = req.body;
+
+  if (!username || !email) {
+    return res
+      .status(400)
+      .json({ message: "Username and email are required." });
+  }
 
   try {
-    // Create the user with hashed password
-    UserModel.create({
-      username: username,
-      email: email,
-    }).then((user) => response.status(201).json(user));
+    const user = await UserModel.create({ username, email });
+    res.status(201).json(user);
   } catch (err) {
-    console.error(err);
-    response.status(500).json({ message: "Server error", error: err });
+    console.error("MongoDB Error:", err);
+    res
+      .status(500)
+      .json({ message: "Failed to create user", error: err.message });
   }
 });
+
 
 
 // API endpoint for calculating based on image
