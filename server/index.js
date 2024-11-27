@@ -13,9 +13,7 @@ const UserModel = require("./model/Users.js");
 const app = express();
 const port =  3000;
 
-mongoose.connect(
-  "mongodb+srv://sayandeep123:babusona@cluster0.0qugd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-);
+
 
 const GENAI_API_KEY = "AIzaSyALwTpR2BCYjUJ-qLRydIyPq42-BusGmhs";
 
@@ -24,6 +22,9 @@ app.use(cors());
 // app.use(express.json())
 app.use(bodyParser.json({ limit: "50mb" })); // Handle large base64 payloads
 
+mongoose.connect(
+  "mongodb+srv://sayandeep123:babusona@cluster0.0qugd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+);
 
 // Initialize Google Generative AI
 const genAI = new GoogleGenerativeAI(GENAI_API_KEY);
