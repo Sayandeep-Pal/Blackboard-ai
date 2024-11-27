@@ -22,6 +22,7 @@
     "form-data": "^4.0.1",
     "jwt-decode": "^4.0.0",
     "mathjs": "^14.0.0",
+    "mongoose": "^8.8.3",
     "multer": "^1.4.5-lts.1",
     "openai": "^4.73.0",
     "sharp": "^0.33.5",
