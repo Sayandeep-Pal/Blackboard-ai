@@ -107,7 +107,7 @@ body {
   }
   .toolbar {
     top: 8%;
-    right: 1px;
+    /* right: 1px; */
     padding: 5px;
     gap: 2px;
   }
