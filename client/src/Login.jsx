@@ -6,7 +6,7 @@ import "./Login.css";
 
 const LoginPage = () => {
 
-    const [auth, setAuth] = useState(false);
+    const [auth, setAuth] = useState(true);
 
     return (
         <>
