@@ -120,15 +120,15 @@ const Whiteboard = () => {
       <div className="toolbar">
         <button
           onClick={() => setTool("pen")}
-          className={`tool-button ${tool === "pen" ? "active" : ""}`}
+          className={`fa fa-pencil tool-button ${tool === "pen" ? "active" : ""}`}
         >
-          Pen
+          {/* Pen */}
         </button>
         <button
           onClick={() => setTool("eraser")}
-          className={`tool-button ${tool === "eraser" ? "active" : ""}`}
+          className={`fa fa-eraser tool-button ${tool === "eraser" ? "active" : ""}`}
         >
-          Eraser
+          {/* Eraser */}
         </button>
         <button onClick={clearCanvas} className="tool-button">
           Clear
