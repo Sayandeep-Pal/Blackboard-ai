@@ -1,35 +1,45 @@
-import { useState } from 'react'
-import './App.css'
-import axios from 'axios'
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import './App.css';
+import axios from 'axios';
 
 function App() {
   const URL = "https://blackboard-ai-be.vercel.app";
   // const URL = "http://localhost:3000";
 
   const [users, setUsers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(""); // State for search input
+  const [filteredUsers, setFilteredUsers] = useState([]); // State for filtered users
 
   useEffect(() => {
     axios.get(`${URL}/log`)
-      .then(res => setUsers(res.data))
-      .catch(err => console.log(err))
+      .then(res => {
+        setUsers(res.data);
+        setFilteredUsers(res.data); // Initially show all users
+      })
+      .catch(err => console.log(err));
   }, []);
 
-  function formatDate(isoDate) {
-    const date = new Date(isoDate);
-    return new Intl.DateTimeFormat('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    }).format(date);
-  }
+  // Update filtered users when the search term changes
+  useEffect(() => {
+    const lowercasedSearchTerm = searchTerm.toLowerCase();
+    const filtered = users.filter(user =>
+      user.username.toLowerCase().includes(lowercasedSearchTerm) ||
+      user.email.toLowerCase().includes(lowercasedSearchTerm)
+    );
+    setFilteredUsers(filtered);
+  }, [searchTerm, users]);
 
   return (
     <div className='container'>
       <div className='table-container'>
         <h1 style={{ color: 'whitesmoke' }}>User Table</h1>
+        <input
+          type="text"
+          placeholder="Search by name or email"
+          className="search-input"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
         <table className='user-table'>
           <thead>
             <tr>
@@ -39,21 +49,24 @@ function App() {
             </tr>
           </thead>
           <tbody>
-            {
-              users.map((user) => {
-                return <tr key={user._id}>
+            {filteredUsers.length > 0 ? (
+              filteredUsers.map(user => (
+                <tr key={user._id}>
                   <td>{user.username}</td>
                   <td>{user.email}</td>
-                  <td>{formatDate(user.createdAt)}</td>
+                  <td>{new Date(user.createdAt).toLocaleString()}</td>
                 </tr>
-              })
-            }
+              ))
+            ) : (
+              <tr>
+                <td colSpan="3" style={{ textAlign: 'center' }}>No matching users found</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
     </div>
-
-  )
+  );
 }
 
-export default App
+export default App;
