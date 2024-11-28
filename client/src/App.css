@@ -108,10 +108,10 @@ body {
 } */
 
 @media (max-width: 500px) {
-  .icon {
+  /* .icon {
     position: relative;
     top: -70px;
-  }
+  } */
   .toolbar {
     top: 15%;
     /* right: 1px; */
