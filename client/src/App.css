@@ -100,8 +100,11 @@ body {
 }
 
 .canvas{
+  display: block;
+  margin: 0 auto; /* Center the canvas horizontally */
   touch-action: none; /* Prevent touch gestures like scrolling */
-}
+  position: relative;
+  border: 1px solid #444; /* Optional: Add a border for better visibility */}
 
 /* .result {
   font-size: small;
