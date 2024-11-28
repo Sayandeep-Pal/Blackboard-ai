@@ -4,8 +4,8 @@ import axios from 'axios'
 import { useEffect } from 'react';
 
 function App() {
-  // const URL = "https://blackboard-ai-be.vercel.app";
-  const URL = "http://localhost:3000";
+  const URL = "https://blackboard-ai-be.vercel.app";
+  // const URL = "http://localhost:3000";
 
     const [users, setUsers] = useState([]);
 
