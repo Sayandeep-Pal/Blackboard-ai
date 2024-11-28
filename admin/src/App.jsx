@@ -24,6 +24,7 @@ function App() {
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Time</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -32,6 +33,7 @@ function App() {
                                 return <tr key={user._id}>
                                     <td>{user.username}</td>
                                     <td>{user.email}</td>
+                                    <td>{user.createdAt}</td>
                                 </tr>
                             })
                         }
