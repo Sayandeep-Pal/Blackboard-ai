@@ -18,12 +18,30 @@ const Whiteboard = () => {
   // Resize canvas to full window
   useEffect(() => {
     const canvas = canvasRef.current;
-    canvas.width = window.innerWidth * 0.95; // 95% of window width
-    canvas.height = window.innerHeight * 0.65; // 60% of window height
+    canvas.width = window.innerWidth * 0.95;
+    canvas.height = window.innerHeight * 0.65;
+  
     const ctx = canvas.getContext("2d");
     ctx.fillStyle = "#1a1a1a"; // Canvas background color
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+    const preventTouchDefault = (e) => {
+      e.preventDefault(); // Prevent pull-to-refresh and scrolling
+    };
+  
+    // Prevent default touch behavior
+    canvas.addEventListener("touchstart", preventTouchDefault, { passive: false });
+    canvas.addEventListener("touchmove", preventTouchDefault, { passive: false });
+    canvas.addEventListener("touchend", preventTouchDefault, { passive: false });
+  
+    // Cleanup on unmount
+    return () => {
+      canvas.removeEventListener("touchstart", preventTouchDefault);
+      canvas.removeEventListener("touchmove", preventTouchDefault);
+      canvas.removeEventListener("touchend", preventTouchDefault);
+    };
   }, []);
+  
 
   // Get cursor or touch position relative to the canvas
   const getCursorPosition = (e) => {
