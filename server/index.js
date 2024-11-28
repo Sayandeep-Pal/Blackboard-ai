@@ -132,6 +132,16 @@ app.get("*", (req, res) => {
     .send("This is a backend API server. Please use valid API endpoints.");
 });
 
+// Userlog for admin pannel
+app.get("/userLog", (request, response) => {
+  UserModel.find({})
+    .then((users) => response.json(users)) // Send users as a response
+    .catch((err) => {
+      console.error(err); // Log the error for debugging
+      response.status(500).json({ error: "Internal Server Error" }); // Send an error response
+    });
+});
+
 // Userdata storing in MongoDB
 app.post("/createUser", async (req, res) => {
   const { username, email } = req.body;
