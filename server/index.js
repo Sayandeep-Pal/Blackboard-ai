@@ -133,12 +133,16 @@ app.get("*", (req, res) => {
 });
 
 // Userlog for admin pannel
-app.get("/userLog", (request, response) => {
+app.get("/log", (request, response) => {
+  console.log("GET /users called");
   UserModel.find({})
-    .then((users) => response.json(users)) // Send users as a response
+    .then((users) => {
+      console.log("Users fetched:", users); // Log fetched users
+      response.json(users);
+    })
     .catch((err) => {
-      console.error(err); // Log the error for debugging
-      response.status(500).json({ error: "Internal Server Error" }); // Send an error response
+      console.error("Error fetching users:", err);
+      response.status(500).json({ error: "Internal Server Error" });
     });
 });
 
