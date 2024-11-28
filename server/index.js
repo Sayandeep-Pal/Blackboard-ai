@@ -7,13 +7,8 @@ const path = require("path");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const UserModel = require("./model/User.js");
 
-
-
-
 const app = express();
-const port =  3000;
-
-
+const port = 3000;
 
 const GENAI_API_KEY = "AIzaSyALwTpR2BCYjUJ-qLRydIyPq42-BusGmhs";
 
@@ -45,7 +40,6 @@ function cleanAndValidateBase64(base64Image) {
 
   return cleanedBase64;
 }
-
 
 // Analyze image using Google Generative AI
 async function analyzeImage(imageBase64, dictOfVars) {
@@ -125,8 +119,7 @@ async function analyzeImage(imageBase64, dictOfVars) {
   }
 }
 
-
-app.get("*", (req, res) => {
+app.get("/", (req, res) => {
   res
     .status(404)
     .send("This is a backend API server. Please use valid API endpoints.");
@@ -166,8 +159,6 @@ app.post("/createUser", async (req, res) => {
       .json({ message: "Failed to create user", error: err.message });
   }
 });
-
-
 
 // API endpoint for calculating based on image
 app.post("/calculate", async (req, res) => {
