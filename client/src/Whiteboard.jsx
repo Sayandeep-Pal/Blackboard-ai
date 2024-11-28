@@ -184,6 +184,7 @@ const Whiteboard = () => {
       </div>
 
       <canvas
+      className="canvas"
         ref={canvasRef}
         onMouseDown={startDrawing}
         onMouseMove={draw}
