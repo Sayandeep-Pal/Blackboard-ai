@@ -101,11 +101,11 @@ body {
 
 
 
-/* .result {
+.result {
   font-size: small;
   width: 95%;
   height: 60%;
-} */
+}
 
 @media (max-width: 500px) {
   /* .icon {
