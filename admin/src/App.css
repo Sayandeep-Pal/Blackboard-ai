@@ -1,0 +1,141 @@
+/* Base container styling */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #121212; /* Dark background */
+    color: #e0e0e0; /* Light text color */
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  /* Table container styling */
+  .table-container {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #1e1e1e; /* Slightly lighter dark background */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+    overflow-x: auto; /* Add horizontal scrolling for small screens */
+  }
+  
+  /* Heading styling */
+  .table-container h1 {
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ffcc00; /* Highlighted heading color */
+  }
+  
+  /* Table styling */
+  .user-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    color: #e0e0e0;
+  }
+  
+  /* Table header styling */
+  .user-table thead {
+    background-color: #333333; /* Dark header row */
+  }
+  
+  .user-table th {
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffcc00; /* Highlighted header text */
+    text-align: left;
+  }
+  
+  /* Table body styling */
+  .user-table tbody tr {
+    transition: background-color 0.3s;
+  }
+  
+  .user-table tbody tr:nth-child(even) {
+    background-color: #2a2a2a; /* Alternate row color */
+  }
+  
+  .user-table tbody tr:nth-child(odd) {
+    background-color: #1e1e1e; /* Alternate row color */
+  }
+  
+  .user-table tbody tr:hover {
+    background-color: #444444; /* Highlighted row on hover */
+  }
+  
+  .user-table td {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+  
+  /* Scrollable table for large datasets */
+  .table-container {
+    overflow-x: auto;
+    max-height: 600px;
+    overflow-y: auto;
+  }
+  
+  /* Custom scrollbar for dark mode */
+  .table-container::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .table-container::-webkit-scrollbar-thumb {
+    background: #555555; /* Thumb color */
+    border-radius: 4px;
+  }
+  
+  .table-container::-webkit-scrollbar-thumb:hover {
+    background: #777777; /* Thumb hover color */
+  }
+  
+  .table-container::-webkit-scrollbar-track {
+    background: #1e1e1e; /* Track color */
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .table-container {
+      padding: 10px;
+    }
+  
+    .table-container h1 {
+      font-size: 1.5rem;
+    }
+  
+    .user-table th,
+    .user-table td {
+      padding: 8px;
+      font-size: 0.8rem;
+    }
+  
+    .user-table {
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .table-container {
+      padding: 10px;
+    }
+  
+    .table-container h1 {
+      font-size: 1.2rem;
+    }
+  
+    .user-table th,
+    .user-table td {
+      padding: 6px;
+      font-size: 0.7rem;
+    }
+  
+    .user-table {
+      font-size: 0.8rem;
+    }
+  }
+  
