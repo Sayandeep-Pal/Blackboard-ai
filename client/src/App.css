@@ -7,8 +7,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  overflow: hidden;
+  /* height: 100vh;
+  overflow: hidden; */
+  height: auto;
+  min-height: 100vh;
+  overflow-y: auto; /* Enable vertical scrolling */
 }
 
 .logo {
