@@ -7,7 +7,7 @@ import "./App.css";
 import "./Login.css";
 
 const LoginPage = () => {
-  const [auth, setAuth] = useState(true);
+  const [auth, setAuth] = useState(false);
 //   const URL = 'http://localhost:3000';
 const URL = "https://blackboard-ai-be.vercel.app";
 
