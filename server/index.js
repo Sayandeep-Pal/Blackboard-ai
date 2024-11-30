@@ -60,7 +60,9 @@ async function analyzeImage(imageBase64, dictOfVars) {
         3. Assigning values to variables like x = 4, y = 5, z = 6, etc.: In this case, assign values to variables and return another key in the dict called {'assign': True}, keeping the variable as 'expr' and the value as 'result' in the original dictionary. RETURN AS A LIST OF DICTS.
         4. Analyzing Graphical Math problems, which are word problems represented in drawing form, such as cars colliding, trigonometric problems, problems on the Pythagorean theorem, adding runs from a cricket wagon wheel, etc. These will have a drawing representing some scenario and accompanying information with the image. PAY CLOSE ATTENTION TO DIFFERENT COLORS FOR THESE PROBLEMS. You need to return the answer in the format of a LIST OF ONE DICT [{'expr': given expression, 'result': calculated answer}].
         5. Detecting Abstract Concepts that a drawing might show, such as love, hate, jealousy, patriotism, or a historic reference to war, invention, discovery, quote, etc. USE THE SAME FORMAT AS OTHERS TO RETURN THE ANSWER, where 'expr' will be the explanation of the drawing, and 'result' will be the abstract concept.
-        
+        6. Anlyzing complex integral problem that requires advanced calculus techniques like substitution and integration by parts to solve. You need to return the answer in the format of a LIST OF ONE DICT [{'expr': given expression, 'result': calculated answer}].
+        7. If analyizing the abstract images or handwriting you find any qustions like 'who is your creator?' or 'who is your dad?' like something you should reply my name "Sayandeep Pal" in result. You need to return the answer in the format of a LIST OF ONE DICT [{'expr': given expression, 'result': calculated answer}].
+
         Here is a dictionary of user-assigned variables. If the given expression has any of these variables, use its actual value from this dictionary accordingly: ${dictOfVars}.
         DO NOT USE BACKTICKS OR MARKDOWN FORMATTING. 
         PROPERLY QUOTE THE KEYS AND VALUES IN the DICTIONARY FOR EASIER PARSING WITH JavaScript's JSON.parse.
