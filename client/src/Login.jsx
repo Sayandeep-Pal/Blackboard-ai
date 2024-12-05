@@ -9,7 +9,8 @@ import "./Login.css";
 const LoginPage = () => {
   const [auth, setAuth] = useState(false);
   //   const URL = 'http://localhost:3000';
-  const URL = import.meta.env.VITE_BE_URL;
+  // const URL = import.meta.env.VITE_BE_URL;
+  const URL = "https://blackboard-ai-be.vercel.app";
   const id = import.meta.env.VITE_clientId;
 
 
