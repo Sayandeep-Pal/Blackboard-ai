@@ -3,9 +3,9 @@ import './App.css';
 import axios from 'axios';
 
 function App() {
-  // const URL = import.meta.env.VITE_BE_URL;
+  const URL = import.meta.env.VITE_BE_URL;
   // const URL = "http://localhost:3000";
-  const URL = "https://blackboard-ai-be.vercel.app";
+  // const URL = "https://blackboard-ai-be.vercel.app";
 
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState(""); // State for search input
