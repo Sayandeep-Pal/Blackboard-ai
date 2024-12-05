@@ -5,6 +5,7 @@ import axios from 'axios';
 function App() {
   const URL = "https://blackboard-ai-be.vercel.app";
   // const URL = "http://localhost:3000";
+  // const URL = import.meta.env.URL;
 
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState(""); // State for search input
@@ -43,6 +44,7 @@ function App() {
         <table className='user-table'>
           <thead>
             <tr>
+              <th>#</th> {/* Serial number column header */}
               <th>Name</th>
               <th>Email</th>
               <th>Time</th>
@@ -50,8 +52,9 @@ function App() {
           </thead>
           <tbody>
             {filteredUsers.length > 0 ? (
-              filteredUsers.map(user => (
+              filteredUsers.map((user, index) => (
                 <tr key={user._id}>
+                  <td>{index + 1}</td> {/* Display serial number */}
                   <td>{user.username}</td>
                   <td>{user.email}</td>
                   <td>{new Date(user.createdAt).toLocaleString()}</td>
@@ -59,7 +62,7 @@ function App() {
               ))
             ) : (
               <tr>
-                <td colSpan="3" style={{ textAlign: 'center' }}>No matching users found</td>
+                <td colSpan="4" style={{ textAlign: 'center' }}>No matching users found</td>
               </tr>
             )}
           </tbody>
