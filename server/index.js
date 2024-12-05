@@ -13,12 +13,12 @@ dotenv.config();
 const app = express();
 const port = 3000;
 
-// const GENAI_API_KEY = "AIzaSyALwTpR2BCYjUJ-qLRydIyPq42-BusGmhs";
-// const mongoDB =
-//   "mongodb+srv://sayandeep123:babusona@cluster0.0qugd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const GENAI_API_KEY = "AIzaSyALwTpR2BCYjUJ-qLRydIyPq42-BusGmhs";
+const mongoDB =
+  "mongodb+srv://sayandeep123:babusona@cluster0.0qugd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
-const GENAI_API_KEY = process.env.GOOGLE_API_KEY;
-const mongoDB = process.env.MONGODB;
+// const GENAI_API_KEY = process.env.GOOGLE_API_KEY;
+// const mongoDB = process.env.MONGODB;
 
 // Middleware
 app.use(cors());
