@@ -126,7 +126,7 @@ async function analyzeImage(imageBase64, dictOfVars) {
   }
 }
 
-app.get("/", (req, res) => {
+app.get("*", (req, res) => {
   res
     .status(404)
     .send("This is a backend API server. Please use valid API endpoints.");
