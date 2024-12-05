@@ -7,10 +7,14 @@ const path = require("path");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const UserModel = require("./model/User.js");
 
+const dotenv = require("dotenv");
+dotenv.config();
+
 const app = express();
 const port = 3000;
 
-const GENAI_API_KEY = "AIzaSyALwTpR2BCYjUJ-qLRydIyPq42-BusGmhs";
+const GENAI_API_KEY = process.env.GOOGLE_API_KEY;
+const mongoDB = process.env.MONGODB;
 
 // Middleware
 app.use(cors());
@@ -18,7 +22,7 @@ app.use(cors());
 app.use(bodyParser.json({ limit: "50mb" })); // Handle large base64 payloads
 
 mongoose.connect(
-  "mongodb+srv://sayandeep123:babusona@cluster0.0qugd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+  mongoDB
 );
 
 // Initialize Google Generative AI

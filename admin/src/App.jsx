@@ -3,7 +3,7 @@ import './App.css';
 import axios from 'axios';
 
 function App() {
-  const URL = "https://blackboard-ai-be.vercel.app";
+  const URL = import.meta.env.VITE_BE_URL;
   // const URL = "http://localhost:3000";
   // const URL = import.meta.env.URL;
 

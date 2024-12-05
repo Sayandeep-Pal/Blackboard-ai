@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const Whiteboard = () => {
 
-  const URL = "https://blackboard-ai-be.vercel.app";
+  const URL = import.meta.env.VITE_BE_URL;
   // const URL = 'http://localhost:3000';
 
   const canvasRef = useRef(null);

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import Whiteboard from "./Whiteboard";
 import "./App.css";
@@ -8,15 +8,16 @@ import "./Login.css";
 
 const LoginPage = () => {
   const [auth, setAuth] = useState(false);
-//   const URL = 'http://localhost:3000';
-const URL = "https://blackboard-ai-be.vercel.app";
+  //   const URL = 'http://localhost:3000';
+  const URL = import.meta.env.VITE_BE_URL;
+  const id = import.meta.env.VITE_clientId;
 
 
   const handleLoginSuccess = async (credentialResponse) => {
     try {
       const decoded = jwtDecode(credentialResponse?.credential);
       const name = `${decoded.given_name} ${decoded.family_name}`;
-    //   console.log("User decoded:", decoded);
+      //   console.log("User decoded:", decoded);
 
       // Save user info in the backend
       await axios.post(`${URL}/createUser`, {
@@ -46,7 +47,7 @@ const URL = "https://blackboard-ai-be.vercel.app";
               Sign in to access your personalized whiteboard experience.
             </p>
 
-            <GoogleOAuthProvider clientId="732493616824-t61jg5fv6kte173v3bcloh04jci234op.apps.googleusercontent.com">
+            <GoogleOAuthProvider clientId={id}>
               <GoogleLogin
                 onSuccess={handleLoginSuccess}
                 onError={handleLoginError}
