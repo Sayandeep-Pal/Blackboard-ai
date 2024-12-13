@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
@@ -36,9 +36,97 @@ const LoginPage = () => {
     alert("Login failed. Please try again.");
   };
 
+  const randomStyle = () => {
+    const random = (min, max) => Math.random() * (max - min) + min;
+  
+    return {
+      position: `absolute`,
+      left: `${random(0,100)}vw`, // Random horizontal position
+      animationName: `fall`,
+      top:`0`,
+      // animationTimingFunction: `linear`,
+      animationIterationCount: `infinite`,
+      fontSize: `${random(15, 50)}px`, // Random size
+      animationDuration: `${random(10, 15)}s`, // Random falling duration
+      animationDelay: `${random(0, 5)}s`, // Random delay
+      transform: `rotate(${random(0, 90)}deg)`, // Random rotation
+    };
+  };
+
+  // useEffect(() => {
+  //   randomStyle();
+  // }, []);
+
+  const fallingItems = [
+    "y = mx + c",
+    "∫xdx",
+    "(a+b)²",
+    "E = mc²",
+    "sin(x) + cos(x)",
+    "📚",
+    "✏️",
+    "🍎",
+    "🚀",
+    "📐",
+    "a² + b² = c²",
+    "🧮",
+    "1 + 1 = 2",
+    "πr²",
+    "Δy/Δx",
+    "∑x",
+    "log(x)",
+    "∞",
+    "√x",
+    "θ",
+    "cos(θ)",
+    "tan(θ)",
+    "∂f/∂x",
+    "v = u + at",
+    "F = ma",
+    "🌟",
+    "🌍",
+    "🌌",
+    "☀️",
+    "🎨",
+    "📓",
+    "✂️",
+    "🎲",
+    "🖋️",
+    "x³",
+    "∫e^x dx",
+    "Ω",
+    "⊗",
+    "∘",
+    "⇔",
+    "∀x ∈ ℝ",
+    "∃y",
+    "ℕ",
+    "φ",
+    "∆",
+    "v(t)",
+    "∂²/∂x²",
+    "lim(x→∞)",
+    "∫∫dxdy",
+  ];
+
   return (
     <>
       {!auth ? (
+        <>
+        {/* Falling Items */}
+        <div className="falling-items">
+            {fallingItems.map((item, index) => (
+              <div
+                key={index}
+                className="falling"
+                style={randomStyle()}
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+
+        {/* Login Page */}
         <div className="login-page">
           <div className="login-card">
             <h1 className="login-title">Welcome to Blackboard.ai</h1>
@@ -67,6 +155,20 @@ const LoginPage = () => {
             </div>
           </div>
         </div>
+
+        <style jsx global>{`
+        @keyframes fall {
+          0% { 
+            transform: translateY(0) rotate(-90deg); 
+            opacity: 1;
+          }
+          100% { 
+            transform: translateY(100vh) rotate(90deg); 
+            opacity: 0;
+          }
+        }
+      `}</style>
+        </>
       ) : (
         <div className="app">
           <h1 className="icon">Blackboard</h1>
