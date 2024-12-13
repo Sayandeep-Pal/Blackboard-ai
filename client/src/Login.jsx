@@ -41,12 +41,12 @@ const LoginPage = () => {
   
     return {
       position: `absolute`,
-      left: `${random(0,100)}vw`, // Random horizontal position
+      left: `${random(-10,100)}vw`, // Random horizontal position
       animationName: `fall`,
       top:`0`,
       // animationTimingFunction: `linear`,
       animationIterationCount: `infinite`,
-      fontSize: `${random(15, 50)}px`, // Random size
+      fontSize: `${random(10, 20)}px`, // Random size
       animationDuration: `${random(10, 15)}s`, // Random falling duration
       animationDelay: `${random(0, 5)}s`, // Random delay
       transform: `rotate(${random(0, 90)}deg)`, // Random rotation
