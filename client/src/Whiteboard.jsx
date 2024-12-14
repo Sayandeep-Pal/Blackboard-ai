@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import axios from 'axios';
 
+
 const Whiteboard = () => {
 
   const URL = import.meta.env.VITE_BE_URL;
@@ -17,6 +18,10 @@ const Whiteboard = () => {
 
   // Resize canvas to full window
   useEffect(() => {
+    
+
+
+
     const canvas = canvasRef.current;
     canvas.width = window.innerWidth * 0.95;
     canvas.height = window.innerHeight * 0.65;
@@ -135,7 +140,94 @@ const Whiteboard = () => {
     downloadLink.click();
   };
 
+
+  const randomStyle = () => {
+    const random = (min, max) => Math.random() * (max - min) + min;
+  
+    return {
+      position: `absolute`,
+      left: `${random(0,100)}vw`, // Random horizontal position
+      animationName: `fall`,
+      top:`0`,
+      // animationTimingFunction: `linear`,
+      animationIterationCount: `infinite`,
+      fontSize: `${random(15, 20)}px`, // Random size
+      animationDuration: `${random(10, 20)}s`, // Random falling duration
+      animationDelay: `${random(0, 5)}s`, // Random delay
+      transform: `rotate(${random(0, 90)}deg)`, // Random rotation
+      opacity: `${random(0,0.2)}`
+    };
+  };
+
+  const fallingItems = [
+    "y = mx + c",
+    "∫xdx",
+    "(a+b)²",
+    "E = mc²",
+    "sin(x) + cos(x)",
+    "📚",
+    "✏️",
+    "🍎",
+    "🚀",
+    "📐",
+    "a² + b² = c²",
+    "🧮",
+    "1 + 1 = 2",
+    "πr²",
+    "Δy/Δx",
+    "∑x",
+    "log(x)",
+    "∞",
+    "√x",
+    "θ",
+    "cos(θ)",
+    "tan(θ)",
+    "∂f/∂x",
+    "v = u + at",
+    "F = ma",
+    "🌟",
+    "🌍",
+    "🌌",
+    "☀️",
+    "🎨",
+    "📓",
+    "✂️",
+    "🎲",
+    "🖋️",
+    "x³",
+    "∫e^x dx",
+    "Ω",
+    "⊗",
+    "∘",
+    "⇔",
+    "∀x ∈ ℝ",
+    "∃y",
+    "ℕ",
+    "φ",
+    "∆",
+    "v(t)",
+    "∂²/∂x²",
+    "lim(x→∞)",
+    "∫∫dxdy",
+  ];
+  
   return (
+    <>
+    {/* Falling Items */}
+    <div className="falling-items">
+    {fallingItems.map((item, index) => (
+      <div
+        key={index}
+        className="falling"
+        style={randomStyle()}
+      >
+        {item}
+      </div>
+    ))}
+  </div>
+
+
+
     <div className="whiteboard">
       <div className="toolbar">
         <button
@@ -223,6 +315,21 @@ const Whiteboard = () => {
         )}
       </div>
     </div>
+
+
+    <style jsx global>{`
+        @keyframes fall {
+          0% { 
+            transform: translateY(0) rotate(-90deg); 
+            opacity: 0.2;
+          }
+          100% { 
+            transform: translateY(100vh) rotate(90deg); 
+            opacity: 0;
+          }
+        }
+      `}</style>
+    </>
   );
 };
 
