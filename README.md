@@ -41,7 +41,6 @@ Creating an intuitive and minimalistic design for both mobile and desktop users.
 
 Real-time AI processing for seamless interaction.
 
-🔗 Try It Out: https://lnkd.in/gR7svNQ6
-
+🔗 Try It Out: https://blackboard-ai.vercel.app
 
 This project has been an incredible learning experience, and I’m thrilled about the possibilities this opens up for education technology and creative problem-solving tools.
