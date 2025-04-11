@@ -88,7 +88,9 @@ async function analyzeImage(imageBase64, dictOfVars) {
     };
 
     // Call the Generative AI API
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({
+      model: "gemini-2.0-flash-thinking-exp-01-21",
+    });
     const result = await model.generateContent([prompt, imagePart]);
 
     // Log the full response for debugging
